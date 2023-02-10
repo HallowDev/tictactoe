@@ -1,7 +1,8 @@
 let board = ["", "", "", "", "", "", "", "", ""];
 let turn = "X";
 let xWins = 0;
-let oWins = 0
+let oWins = 0;
+let playerNumber = 1;
 const winningCombinations = [
   [0, 1, 2],
   [3, 4, 5],
@@ -21,24 +22,25 @@ const updateBoard = (index) => {
     } else {
         playerNumber = 2;
     }
+    console.log(turn,playerNumber)
     if (checkWin(board, turn)) {
-      document.getElementById("message").textContent = "Player "+playerNumber+" wins!";
-      if (turn === "X") {
+    document.getElementById("message").textContent = "Player "+playerNumber+" wins!";
+    if (turn === "X") {
         xWins++;
         document.getElementById("x-wins").textContent = xWins;
-      } else {
+    } else {
         oWins++;
         document.getElementById("o-wins").textContent = oWins;
-      }
+    }
     } else if (checkDraw(board)) {
-      document.getElementById("message").textContent = "Draw!";
+    document.getElementById("message").textContent = "Draw!";
     } else {
-      turn = turn === "X" ? "O" : "X";
-      document.getElementById("message").textContent = "Player "+playerNumber+"'s turn";
+    turn = turn === "X" ? "O" : "X";
+    document.getElementById("message").textContent = "Player "+playerNumber+"'s turn";
     }
-    } else {
-        document.getElementById("message").textContent = "Spot already occupied. Player"+playerNumber+"'s turn";
-    }
+} else {
+    document.getElementById("message").textContent = "Spot already occupied. Player"+playerNumber+"'s turn";
+}
 };
 const checkWin = (board, player) => {
     for (let i = 0; i < winningCombinations.length; i++) {
@@ -57,9 +59,10 @@ for (let i = 0; i < board.length; i++) {
 }
 return true;
 }
-const restartGame = (playerNumber) => {
+const restartGame = () => {
     turn = turn === "X" ? "O" : "X";
-    playerNumber = playerNumber == 1 ? 2 : 1
+    console.log(playerNumber);
+    playerNumber = playerNumber == 1 ? 2 : 1;
     board = ["", "", "", "", "", "", "", "", ""];
     for (let i = 0; i < 9; i++) {
       document.getElementById(i).textContent = "";
@@ -88,7 +91,7 @@ const spots = document.querySelectorAll(".spot");
         updateBoard(Number(spot.id));
     });
 })
-document.getElementById("message").textContent = `Player 1's turn`;
+document.getElementById("message").textContent = "Player "+playerNumber+"'s turn";
 
 const restartBtn = document.querySelector('#restartBtn');
 
