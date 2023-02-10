@@ -16,8 +16,13 @@ const updateBoard = (index) => {
   if (board[index] === "") {
     board[index] = turn;
     document.getElementById(index).textContent = turn;
+    if (turn == "X") {
+        playerNumber = 1;
+    } else {
+        playerNumber = 2;
+    }
     if (checkWin(board, turn)) {
-      document.getElementById("message").textContent = `Player ${turn} wins!`;
+      document.getElementById("message").textContent = "Player "+playerNumber+" wins!";
       if (turn === "X") {
         xWins++;
         document.getElementById("x-wins").textContent = xWins;
@@ -25,17 +30,15 @@ const updateBoard = (index) => {
         oWins++;
         document.getElementById("o-wins").textContent = oWins;
       }
-      restartGame();
     } else if (checkDraw(board)) {
       document.getElementById("message").textContent = "Draw!";
-      restartGame();
     } else {
       turn = turn === "X" ? "O" : "X";
-      document.getElementById("message").textContent = `Player ${turn}'s turn`;
+      document.getElementById("message").textContent = "Player "+playerNumber+"'s turn";
     }
-  } else {
-    document.getElementById("message").textContent = `Spot already occupied. Player ${turn}'s turn`;
-  }
+    } else {
+        document.getElementById("message").textContent = "Spot already occupied. Player"+playerNumber+"'s turn";
+    }
 };
 const checkWin = (board, player) => {
     for (let i = 0; i < winningCombinations.length; i++) {
@@ -54,8 +57,9 @@ for (let i = 0; i < board.length; i++) {
 }
 return true;
 }
-const restartGame = () => {
+const restartGame = (playerNumber) => {
     turn = turn === "X" ? "O" : "X";
+    playerNumber = playerNumber == 1 ? 2 : 1
     board = ["", "", "", "", "", "", "", "", ""];
     for (let i = 0; i < 9; i++) {
       document.getElementById(i).textContent = "";
@@ -67,11 +71,11 @@ const restartGame = () => {
         clearInterval(intervalId);
         for (let i = 0; i < 9; i++) {
           document.getElementById(i).style.pointerEvents = "auto";
-          document.getElementById("message").textContent = `Player ${turn}'s turn`;
-          document.getElementById("countdown").textContent = 'Game playing';
+          document.getElementById("message").textContent = "Player "+playerNumber+"'s turn";
+          document.getElementById("countdown").textContent = "Game playing";
         }
       } else {
-        document.getElementById("countdown").textContent = counter;
+        document.getElementById("countdown").textContent = "Game restarts in "+counter;
         counter--;
       }
     };
@@ -84,4 +88,8 @@ const spots = document.querySelectorAll(".spot");
         updateBoard(Number(spot.id));
     });
 })
-document.getElementById("message").textContent = `Player ${turn}'s turn`;
+document.getElementById("message").textContent = `Player 1's turn`;
+
+const restartBtn = document.querySelector('#restartBtn');
+
+restartBtn.addEventListener('click', restartGame);
