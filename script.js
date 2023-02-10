@@ -68,7 +68,7 @@ const restartGame = () => {
         for (let i = 0; i < 9; i++) {
           document.getElementById(i).style.pointerEvents = "auto";
           document.getElementById("message").textContent = `Player ${turn}'s turn`;
-          document.getElementById("countdown").textContent = 'game playing';
+          document.getElementById("countdown").textContent = 'Game playing';
         }
       } else {
         document.getElementById("countdown").textContent = counter;
