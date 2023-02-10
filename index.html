@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-gap: 10px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 36px;
+            line-height: 60px;
+        }
+
+        .board > div {
+            border: 1px solid black;
+        }
+        
+        .spot {
+          width: 100px;
+          height: 100px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 36px;
+          font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+    <div class="board">
+      <div id="0" class="spot"></div>
+      <div id="1" class="spot"></div>
+      <div id="2" class="spot"></div>
+      <div id="3" class="spot"></div>
+      <div id="4" class="spot"></div>
+      <div id="5" class="spot"></div>
+      <div id="6" class="spot"></div>
+      <div id="7" class="spot"></div>
+      <div id="8" class="spot"></div>
+    </div>
+    <br>
+    <div id="countdown">game playing</div>
+    <div id="message"></div>
+    <br>
+    <div id="wins">
+      X wins: <span id="x-wins">0</span>
+      O wins: <span id="o-wins">0</span>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
